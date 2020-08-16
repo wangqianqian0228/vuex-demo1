@@ -1,12 +1,13 @@
 <!-- 减少组件 -->
 <template>
   <div>
-    <h2>当前最新的count值为：</h2>
-   <button>-1</button>
+    <h2>{{showNum}}</h2>
+   <button @click="subbtn">-1</button>
   </div>
 </template>
 
 <script>
+import {mapState,mapMutations,mapGetters} from 'vuex'
 export default {
   data () {
     return {
@@ -15,11 +16,19 @@ export default {
 
   components: {},
 
-  computed: {},
+  computed: {
+    ...mapState(['count']),
+    ...mapGetters(['showNum'])
+  },
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    ...mapMutations(['sub']),
+    subbtn(){
+     this.$store.dispatch('subAsync')
+    }
+  }
 }
 
 </script>
